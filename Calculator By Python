@@ -1,0 +1,107 @@
+# ============================================
+#         PYTHON CALCULATOR
+#         Built for learning purposes
+# ============================================
+
+def add(a, b):
+    return a + b
+
+def subtract(a, b):
+    return a - b
+
+def multiply(a, b):
+    return a * b
+
+def divide(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero!"
+    return a / b
+
+def modulus(a, b):
+    if b == 0:
+        return "Error: Cannot divide by zero!"
+    return a % b
+
+def power(a, b):
+    return a ** b
+
+
+def get_number(prompt):
+    while True:
+        try:
+            return float(input(prompt))
+        except ValueError:
+            print("  Invalid input! Please enter a number.\n")
+
+
+def show_menu():
+    print("\n" + "=" * 40)
+    print("         PYTHON CALCULATOR")
+    print("=" * 40)
+    print("  1. Addition        ( + )")
+    print("  2. Subtraction     ( - )")
+    print("  3. Multiplication  ( * )")
+    print("  4. Division        ( / )")
+    print("  5. Modulus         ( % )")
+    print("  6. Power           ( ** )")
+    print("  7. Exit")
+    print("=" * 40)
+
+
+def calculator():
+    print("\n  Welcome to Python Calculator!")
+
+    while True:
+        show_menu()
+
+        choice = input("\n  Choose an option (1-7): ").strip()
+
+        if choice == "7":
+            print("\n  Thanks for using the calculator. Goodbye!\n")
+            break
+
+        if choice not in ("1", "2", "3", "4", "5", "6"):
+            print("\n  Invalid option! Please choose between 1 and 7.")
+            continue
+
+        print()
+        a = get_number("  Enter first number  : ")
+        b = get_number("  Enter second number : ")
+
+        if choice == "1":
+            result = add(a, b)
+            operator = "+"
+        elif choice == "2":
+            result = subtract(a, b)
+            operator = "-"
+        elif choice == "3":
+            result = multiply(a, b)
+            operator = "*"
+        elif choice == "4":
+            result = divide(a, b)
+            operator = "/"
+        elif choice == "5":
+            result = modulus(a, b)
+            operator = "%"
+        elif choice == "6":
+            result = power(a, b)
+            operator = "**"
+
+        # Display result
+        if isinstance(result, str):
+            # It's an error message
+            print(f"\n  Result: {result}")
+        else:
+            # Format nicely: show int if no decimal part
+            a_display = int(a) if a == int(a) else a
+            b_display = int(b) if b == int(b) else b
+            result_display = int(result) if isinstance(result, float) and result == int(result) else result
+
+            print(f"\n  {a_display} {operator} {b_display} = {result_display}")
+
+        input("\n  Press Enter to continue...")
+
+
+# Run the calculator
+if __name__ == "__main__":
+    calculator()
